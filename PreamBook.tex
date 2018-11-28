@@ -1,0 +1,131 @@
+
+%オクマクロ
+%傍点＝\kenten{}
+%ルビ＝\ruby{漢字}{かんじ}
+\usepackage{okumacro}
+
+%記号用
+\usepackage{amssymb}
+%レイアウト確認用パッケージ
+\usepackage{layout}
+%部分的段組 begin{multicols}{2}
+\usepackage{multicol}
+
+%レイアウト・余白指定
+\usepackage[dvipdfm,truedimen]{geometry}
+\geometry{left=20truemm,right=20truemm,top=20truemm,bottom=20truemm}
+
+
+%枠など
+\usepackage{tcolorbox}
+\usepackage{ascmac}
+
+% 図
+% \usepackage[dviout]{graphicx}
+
+% 図の回り込み
+\usepackage{wrapfig}
+
+% URL
+\usepackage{url}
+
+% % ハイパーリンク
+\usepackage[dvipdfmx,bookmarks=true,bookmarksnumbered=true]{hyperref}
+\usepackage{pxjahyper}
+
+%ツリー図
+%\usepackage{tikz,tikz-qtree}
+
+%==================
+%行数・文字数は行間・文字間隔を調整するのが一番無難っぽい
+%==================
+%行数表示
+%\pagewiselinenumbers
+%行間
+\renewcommand{\baselinestretch}{0.9}
+%文字間隔(begin{document}の後に書いて)
+\kanjiskip=1.5zw plus 3pt minus 3pt
+\xkanjiskip=1.5zw plus 3pt minus 3pt
+
+
+%下使えない(効果なし)
+%文字数・行数指定用マクロ(http://d.hatena.ne.jp/Rion778/20091002/1254482262)
+%上使えないがURLは残しておく
+
+% フォントセットの変更(Windowsの場合はコメントアウト)
+% \usepackage[deluxe]{otf}
+%ウムラウトなどを表示するため
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+%ちゃんとインデントされるように
+\usepackage{indentfirst}
+
+\pagestyle{headings}
+
+%タイトル
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1pt\hfill \kern \z@}
+\renewcommand{\maketitle}{\begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \parindent \z@
+    \reset@font
+    \null
+    \vskip 10\p@
+    \hbox{\mbox{\hspace{3em}}%
+      \vrule depth 0.6\textheight%
+      \mbox{\hspace{2em}}
+      \vbox{
+        \vskip 130\p@
+        \begin{flushleft}
+          \HUGE \bfseries \@title \par
+        \end{flushleft}
+        \vfil
+        \vskip 60\p@
+        {\Large\hfil\normalfont \@date}%
+        }}
+    \null
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+}
+\makeatother
+
+%目次関係
+\renewcommand{\contentsname}{\mcfamily 目次}
+\renewcommand{\headfont}{\mcfamily \rmfamily}
+\setcounter{tocdepth}{2}
+
+%====================
+%セクション体裁変更
+%====================
+\setcounter{secnumdepth}{3}
+\usepackage{titlesec}
+\usepackage{picture}
+
+%chapter
+\titleformat{\chapter}[block]
+{}{}{0pt}{
+	\fontsize{30pt}{30pt}\selectfont\filleft\hrule
+}[
+	\hrule \smallskip \hrule \Large{\filleft 第 \thechapter 章}
+]
+\titlespacing{\chapter}{0pt}{*2}{10truemm}
+
+%section
+\titleformat{\section}[block]
+{}{}{0pt}{
+	\normalfont \Large\thesection
+}[\hrule]
+\titlespacing{\section}{0pt}{2zh}{1zh}
+
+%subsection
+\titlespacing{\subsection}{0.5zw}{1zh}{0zh}
+
+%subsubsection
+\titlespacing{\subsubsection}{0.7zw}{1zh}{0zh}
+
+%paragraphの変更(前後改段落・明朝体)
+\renewcommand{\paragraph}[1]{\par \medskip \mcfamily\underline{□#1} \medskip \par}
+\titlespacing{\paragraph}{0.5zw}{2zh}{1zh}
