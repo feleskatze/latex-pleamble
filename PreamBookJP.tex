@@ -1,0 +1,67 @@
+% \documentclass[uplatex, tate, hanging_punctuation, paper=b6, reference_mark=interlinear, book]{jlreq}
+
+% フォントセットの変更(Windowsの場合はコメントアウト)
+% \usepackage[deluxe]{otf}
+%ウムラウトなどを表示するため
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+%% 図表など
+% 図の読みこみのために
+\usepackage[dvipdfmx, hiresbb]{graphicx, xcolor}
+\usepackage{booktabs} % 表の横罫線
+
+%% 囲み枠
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable} % ページをまたいで分割できるように
+
+%% misc
+\usepackage{okumacro} % 圏点などのために
+\usepackage{pxrubrica} % ルビをつける（okumacroのrubyは使わない
+
+%% 見出しのスタイルの設定
+% chapterの定義
+\DeclareTobiraHeading{chapter}{1}{% chapter を扉見出しに
+  format={\null\vfil {\huge\gtfamily\bfseries {\LARGE #1}#2}}, % 見出しのフォント
+  label_format={第\thechapter 章\hspace{2zw}} % ラベルのフォーマット
+}
+\DeclareBlockHeading{chapter}{1}{ % chapter を別行見出しに
+  pagebreak=cleardoublepage, % 章を始める前に改丁
+  label_format={第\thechapter 章}, % ラベルのフォーマット
+  font={\gtfamily\LARGE}, % 見出しのフォント
+  lines=3,after_lines=2, % 見出しのために5行取り、後ろの方が2行分広い
+  indent=2zw % インデント
+}
+
+% section の定義
+\renewcommand{\thesection}{} % 節の番号はなしが基本
+\DeclareBlockHeading{section}{2}{ % section を別行見出しに
+  font={\gtfamily}, % 見出しのフォント
+  lines=1, before_lines=1% 見出しの前に1行取る
+}
+
+%% 目次の設定
+\setcounter{tocdepth}{1} % sectionまでを目次に
+
+%% hyperrefの設定
+\usepackage[dvipdfmx,%
+    pdftitle=タイトル, % PDFのタイトル
+    pdfauthor=作成者, % PDFの作成者
+    bookmarks=true, % PDFにしおりをつける
+    bookmarksnumbered=true, % しおりに節番号などをつける
+    colorlinks=false, % リンクには色をつけない
+    hyperfootnotes=false, % 脚注からのリンクを作らない
+    pdfborder={0 0 0}, % 枠なし
+    pdfdirection=R2L, % 開く方向
+    pdfpagelayout=TwoPageRight, % 奇数頁が右側になるような見開きモードで開く
+    pdfpagemode=UseNone]{hyperref}
+
+% PDFにしたときのしおりの文字化けを防ぐ
+\usepackage{pxjahyper}
+
+\usepackage{pxeveryshi}
+% hyperref を使っているときに
+% 目次でのページ番号の向きを適切にする
+\makeatletter
+\def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
+\makeatother

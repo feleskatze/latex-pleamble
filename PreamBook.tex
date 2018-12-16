@@ -14,6 +14,37 @@
 %レイアウト・余白指定
 \usepackage[dvipdfm,truedimen]{geometry}
 \geometry{left=20truemm,right=20truemm,top=20truemm,bottom=20truemm}
+% ######## measure #########
+% # mm = 1mm = 2.85pt      #
+% # cm = 10mm = 28.5pt     #
+% # in = 25.4mm = 72.27pt  #
+% # pt = 0.35mm = 1pt      #
+% # em = width of [M]      #
+% # ex = height of [x]     #
+% # zw = width of [Kanji]  #
+% # zh = height of [Kanji] #
+% ##########################
+% ##################### Portrait Setting #########################
+% # TOP = 1inch + ¥voffset + ¥topmargin + ¥headheight + ¥headsep #
+% #     = 1inch + 0pt + 4pt + 20pt + 18pt (default)              #
+% # BOTTOM = ¥paperheight - TOP -¥textheight                     #
+% ################################################################
+% \setlength{\textheight}{\paperheight}   % 紙面縦幅を本文領域にする（BOTTOM=-TOP）
+% \setlength{\topmargin}{4.6truemm}       % 上の余白を30mm（=1inch+4.6mm）に
+% \addtolength{\topmargin}{-\headheight}  %
+% \addtolength{\topmargin}{-\headsep}     % ヘッダの分だけ本文領域を移動させる
+% \addtolength{\textheight}{-60truemm}    % 下の余白も30mm（BOTTOM=-TOPだから+TOP+30mm）
+% #################### Landscape Setting #######################
+% # LEFT = 1inch + ¥hoffset + ¥oddsidemargin (¥evensidemargin) #
+% #      = 1inch + 0pt + 0pt                                   #
+% # RIGHT = ¥paperwidth - LEFT - ¥textwidth                    #
+% ##############################################################
+\setlength{\textwidth}{\paperwidth}     % 紙面横幅を本文領域にする（RIGHT=-LEFT）
+\setlength{\oddsidemargin}{-0.4truemm}  % 左の余白を25mm(=1inch-0.4mm)に
+\setlength{\evensidemargin}{-0.4truemm} %
+\addtolength{\textwidth}{-50truemm}     % 右の余白も25mm（RIGHT=-LEFT）
+%
+%
 
 
 %枠など
@@ -53,7 +84,7 @@
 %上使えないがURLは残しておく
 
 % フォントセットの変更(Windowsの場合はコメントアウト)
-% \usepackage[deluxe]{otf}
+\usepackage[deluxe, uplatex]{otf}
 %ウムラウトなどを表示するため
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -103,6 +134,22 @@
 \setcounter{secnumdepth}{3}
 \usepackage{titlesec}
 \usepackage{picture}
+% http://abenori.blogspot.com/2018/05/titlesec.html
+% \titleformat{<命令>} \sectionなど
+%     [<特殊な形状の指定>] hang block display runin leftmargin rightmargin drop wrap frame
+%     {<書式>}
+%     {<ラベル書式>}
+%     {<ラベルと見出し文字列の間の空き>}
+%     {<見出し文字列直前に入るコード>}
+%     [<見出し直後に入るコード>]
+% \titlespacing{<命令>}
+%     {<見出し左の空き（hang，block，display，frameの時）または見出しの長さ（その他）>}
+%     {<見出し上の空き>}
+%     {<見出しとその後の本文との空き>}% hang/block/display/frameとその他で方向が異なる
+%     [<見出し右の空き>] % hang，block，display，frameのみ
+
+% 目次や参考文献
+\titleformat{name=\chapter, numberless}[block]{}{}{0pt}{\fontsize{20pt}{20pt}\selectfont}
 
 %chapter
 \titleformat{\chapter}[block]
